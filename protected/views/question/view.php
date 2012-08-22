@@ -14,33 +14,31 @@ $this->menu=array(
 ?>
 
 <h1><?php echo $model->title; ?></h1>
-
-<?php $this->widget('zii.widgets.CDetailView', array(
-	'data'=>$model,
-	'attributes'=>array(
-		
-		
-		'owner',
-		'status',
-		'create_date',
-		'update_time',
-                 array(
-                  'name'=>'content',
-                   'value'=>html_entity_decode($model->content),
-                   'type'=>'raw'),
-	),
-)); ?>
+ <?php $qowner=YumUser::model()->findByPk($model->owner);?>
+<div class="question-view" style="width:700px;">
+	<div class="question-header-wrapper" style="height:20px;">
+		<div id="question-vote" style="float:left;">
+			<span id="up-vote-image"><img src="/codepacu/images/site/vote-arrow-up.png"><span></br>
+			<span id="question-vote-number"><?php echo $model->vote;?></span>Votes</br>
+			<span id="down-vote-image"><img src="/codepacu/images/site/vote-arrow-down.png"><span></br>
+			
+		</div>
+		<div class="question-user-time" style="float:center;"><span class="question-owner"><?php echo "posted by ".$qowner->username." on ".$model->create_date;?> </span></div>
+	</div>
+	<div><?php echo html_entity_decode($model->content);?></div>
+</div>
+                  
 
 
 <?php if($model->answerCount>=1 ):?>
 <h3>
-<?php echo $model->answerCount>1 ? $model->answerCount.' comments': 'One comment';?>
+<?php echo $model->answerCount>1 ? $model->answerCount.' Answers': 'Answers';?>
 </h3>
 
 <?php $this->renderPartial('_answers',array('answer'=>$model->answers));?>
 
 <?php endif;?>
-<h3>Leave a comment</h3>
+<h3>Reply this question</h3>
 <?php if(Yii::app()->user->hasFlash('answerSubmitted')):?>
 <div class="flash-success">
 <?php echo Yii::app()->user->getFlash('answerSubmitted');?>

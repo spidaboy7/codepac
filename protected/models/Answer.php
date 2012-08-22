@@ -20,7 +20,7 @@
  * @property Questions $question0
  */
 class Answer extends AutomatedTimeActiveRecord
-{          public $up_rate;
+{         
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
@@ -49,11 +49,11 @@ class Answer extends AutomatedTimeActiveRecord
 		return array(
 			
 			array('question, content, owner', 'required'),
-			array('question, owner, replied_id, up_rate', 'numerical', 'integerOnly'=>true),
-			array('create_date, update_time,up_rate', 'safe'),
+			array('question, owner, replied_id', 'numerical', 'integerOnly'=>true),
+			array('create_date, update_time,up_vote,down_vote', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, question, content, owner, replied_id, create_date, update_time, up_rate', 'safe', 'on'=>'search'),
+			array('id, question, content, owner, replied_id, create_date, update_time, up_vote,down_vote', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -85,7 +85,8 @@ class Answer extends AutomatedTimeActiveRecord
 			'replied_id' => 'Replied',
 			'create_date' => 'Create Date',
 			'update_time' => 'Update Time',
-			'up_rate' => 'Up Rate',
+			'up_vote' => 'Up Vote',
+			'down_vote'=>'Down Vote',
 		);
 	}
 
@@ -107,8 +108,8 @@ class Answer extends AutomatedTimeActiveRecord
 		$criteria->compare('replied_id',$this->replied_id);
 		$criteria->compare('create_date',$this->create_date,true);
 		$criteria->compare('update_time',$this->update_time,true);
-		$criteria->compare('up_rate',$this->up_rate);
-
+		$criteria->compare('up_vote',$this->up_vote);
+		$criteria->compare('down_vote',$this->down_vote);
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));

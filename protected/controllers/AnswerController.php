@@ -7,6 +7,7 @@ class AnswerController extends Controller
 	 * using two-column layout. See 'protected/views/layouts/column2.php'.
 	 */
 	public $layout='//layouts/column2';
+	public $_question=null;
 
 	/**
 	 * @return array action filters
@@ -14,8 +15,40 @@ class AnswerController extends Controller
 	public function filters()
 	{
 		return array(
-			'accessControl', // perform access control for CRUD operations
+			'accessControl', // perform access control for CRUD operations			     
+			'questionContext + create',//Checks to ensure a question existis before creating an answer entry
 		);
+	}
+	/*Executes the question context filtering
+	*This method is used by 'questionContext +create 'filter
+	*Its called before  everytime the actionCreate method  is being called
+	**/
+	public function filterQuestionContext($filterChain){
+	$questionId=null;
+	if(isset($_GET['id'])){
+		$questionId=$_GET['id'];
+	}
+	else{
+		if(isset($_POST['id']))
+			$questionId=$_POST['id'];
+	}
+	$this->loadQuestion($questionId);
+	$filterChain->run();
+	}
+	
+	/*Loads the the questions to be associated with the asnwer
+	*$questId is numerical,primary identifier of the question
+	*@returns the Question model object to be associted with the answer
+	**/
+	protected function loadQuestion($questId){
+        if($this->_question===null){
+		$this->_question=Question::model()->findByPk($questId);
+		if($this->_question===null){
+			throw new CHttpException(404,'The requested Question does not exists');
+			}
+			
+		}
+	return $this->_question;
 	}
 
 	/**
@@ -31,7 +64,7 @@ class AnswerController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update'),
+				'actions'=>array('create','update','downvote','upvote'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -69,6 +102,7 @@ class AnswerController extends Controller
 		if(isset($_POST['Answer']))
 		{
 			$model->attributes=$_POST['Answer'];
+			$model->question=$this->_question->id;
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}
@@ -173,4 +207,21 @@ class AnswerController extends Controller
 			Yii::app()->end();
 		}
 	}
+	public function actionDownVote($id){
+	$model=$this->loadModel($id);
+	$model->down_vote=++$model->down_vote;
+	$model->save();
+	
+	echo $model->down_vote;
+
+	}
+	public function actionUpVote($id){
+        $model=$this->loadModel($id);
+        $model->up_vote=++$model->up_vote;
+        $model->save();
+
+        echo $model->up_vote;
+
+        }
+
 }

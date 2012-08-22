@@ -12,3 +12,10 @@ $(document).ready(function() {
       });
     });
 
+function downVoteAnswer(id){
+	var data= $.get("/codepacu/index.php/answer/downvote/id/"+id,
+	function(data){
+	$('#ans-downvote-'+id).text(data);
+	});
+}
+

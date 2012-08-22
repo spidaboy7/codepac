@@ -1490,7 +1490,7 @@ function styleCode()
     {
         if (!$(this).hasClass("prettyprint")) 
         {
-            $(this).addClass("prettyprint linenums");
+            $(this).addClass("prettyprint");
             a = true
         }
     });

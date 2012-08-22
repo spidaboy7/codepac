@@ -21,11 +21,20 @@ return array(
 
 	'modules'=>array(
 		// uncomment the following to enable the Gii tool
+		'gii'=>array('generatorPaths'=>array('bootstrap.gii',),),
 		'user'=>array(
 		'debug'=>false,
 		'userTable'=>'user',
 		'translationTable'=>'translation',
-		'mailer'=>'PHPMailer'
+		'mailer'=>'PHPMailer',
+		'facebookConfig'=>array(
+			'appId'=>'142433968341',
+			'secret'=>'a9f79372e1f945c0e0b743d9be8939f1',
+			'domain'=>'localhost',
+			'status'=>true,
+			'xfbml'=>true,
+			'cookie'=>true,
+			'lang'=>'en_US',)
 		),
 		 'avatar'=>array(),
        		 
@@ -58,6 +67,8 @@ return array(
 
 	// application components
 	'components'=>array(
+		'bootstrap'=>array(
+		'class'=>'ext.bootstrap.components.Bootstrap',),
   		'session'=>array(
 		'sessionName'=>'SiteSession',
 		'class'=>'CHttpSession',
@@ -86,11 +97,13 @@ return array(
 		),
 		// uncomment the following to use a MySQL database
 		*/
+		 
+		'preload'=>array('bootstrap'),
 		'db'=>array(
 			'connectionString' => 'mysql:host=localhost;dbname=codepacu',
 			'emulatePrepare' => true,
 			'username' => 'root',
-			'password' => 'rwinkwavu',
+			'password' => '',
 			'charset' => 'utf8',
                         'tablePrefix'=>'',
 		),

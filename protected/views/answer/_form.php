@@ -1,4 +1,6 @@
 <div class="form">
+<script type="text/javascript" src="/codepacu/css/jquery.timers-1.2.js"></script>
+<script type="text/javascript" src="/codepacu/css/custom_js.js"></script>
 
 <?php $form=$this->beginWidget('CActiveForm', array(
 	'id'=>'answer-form',
@@ -10,46 +12,22 @@
 	<?php echo $form->errorSummary($model); ?>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'question'); ?>
-		<?php echo $form->textField($model,'question'); ?>
-		<?php echo $form->error($model,'question'); ?>
-	</div>
-
-	<div class="row">
 		<?php echo $form->labelEx($model,'content'); ?>
-		<?php echo $form->textArea($model,'content',array('rows'=>6, 'cols'=>50)); ?>
-		<?php echo $form->error($model,'content'); ?>
+		 <div id="wmd-button-bar" class="wmd-panel"></div>
+                <div><?php echo $form->textArea($model,'content',array('rows'=>6, 'cols'=>50,'class'=>'wmd-panel','id'=>'wmd-input')); ?></div>
+                <?php echo $form->error($model,'content'); ?>
+
+                <div id="wmd-preview" class="wmd-panel"></div>
+
 	</div>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'owner'); ?>
-		<?php echo $form->textField($model,'owner'); ?>
-		<?php echo $form->error($model,'owner'); ?>
-	</div>
+	
 
-	<div class="row">
+	<!--<div class="row">
 		<?php echo $form->labelEx($model,'replied_id'); ?>
 		<?php echo $form->textField($model,'replied_id'); ?>
 		<?php echo $form->error($model,'replied_id'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'create_date'); ?>
-		<?php echo $form->textField($model,'create_date'); ?>
-		<?php echo $form->error($model,'create_date'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'update_time'); ?>
-		<?php echo $form->textField($model,'update_time'); ?>
-		<?php echo $form->error($model,'update_time'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'up_rate'); ?>
-		<?php echo $form->textField($model,'up_rate'); ?>
-		<?php echo $form->error($model,'up_rate'); ?>
-	</div>
+	</div>-->
 
 	<div class="row buttons">
 		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>

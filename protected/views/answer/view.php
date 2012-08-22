@@ -20,11 +20,17 @@ $this->menu=array(
 	'attributes'=>array(
 		'id',
 		'question',
-		'content',
+		array(
+                  'name'=>'content',
+                  'value'=>html_entity_decode($model->content),
+                  'type'=>'raw'),
+
 		'owner',
 		'replied_id',
 		'create_date',
 		'update_time',
-		'up_rate',
+		'up_vote',
+		'down_vote',
 	),
+	
 )); ?>

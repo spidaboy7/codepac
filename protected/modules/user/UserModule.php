@@ -46,7 +46,7 @@ class UserModule extends CWebModule {
 	public $mailer = 'PHPMailer'; 
 	public $phpmailer = array(); // PHPMailer array options.
 
-	public $facebookConfig = false;
+	public $facebookConfig = true;
 	public $pageSize = 10;
 
 	// if you want the users to be able to edit their profile TEXTAREAs with an
@@ -123,7 +123,7 @@ class UserModule extends CWebModule {
 	const LOGIN_BY_TWITTER		= 16;
 	const LOGIN_BY_LDAP			= 32;
 	// Allow login only by username by default.
-	public $loginType = 2;
+	public $loginType = 9;
 
 	/**
 	 * Defines all Controllers of the User Management Module and maps them to

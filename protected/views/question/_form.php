@@ -1,7 +1,6 @@
 <div class="form">
 
 <script type="text/javascript" src="/codepacu/css/jquery.timers-1.2.js"></script>
-<script type="text/javascript" src="/codepacu/css/custom_js.js"></script>
 <?php $form=$this->beginWidget('CActiveForm', array(
 	'id'=>'question-form',
 	'enableAjaxValidation'=>false,

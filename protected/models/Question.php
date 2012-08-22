@@ -47,7 +47,7 @@ class Question extends AutomatedTimeActiveRecord
 			array('title, content', 'required'),
 			array('owner, status', 'numerical', 'integerOnly'=>true),
 			array('title', 'length', 'max'=>255),
-			array('create_date, update_time', 'safe'),
+			array('create_date, update_time,vote', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id, title, content, owner, status, create_date, update_time', 'safe', 'on'=>'search'),
@@ -102,7 +102,7 @@ class Question extends AutomatedTimeActiveRecord
 		$criteria->compare('status',$this->status);
 		$criteria->compare('create_date',$this->create_date,true);
 		$criteria->compare('update_time',$this->update_time,true);
-
+		$criteria->compare('vote',$this->vote,true);
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));

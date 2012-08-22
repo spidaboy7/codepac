@@ -1,10 +1,25 @@
+<?php
+
+$fbconfig = Yum::module()->facebookConfig;
+if(isset($fbconfig)) {
+    Yii::import('application.modules.user.vendors.facebook.*');
+        require_once('Facebook.php');
+    $facebook = new Facebook($fbconfig);
+    $fb_session = $facebook->getSession();
+    if($fb_session && Yii::app()->user->isGuest)
+                if($this->action->id != 'login')
+                        $this->redirect($this->createUrl('/user/auth/login'));
+}
+?>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="language" content="en" />
-	<script type="text/javascript" src="/codepac/css/wmd/jQuery/jquery-1.2.6.min.js "></script>
         <script type="text/javascript" src="/codepac/css/wmd/showdown.js"></script>
+	<script type="text/javascript" src="/codepac/css/wmd/jQuery/jquery-1.2.6.min.js "></script>
+	<script type="text/javascript" src="/codepac/css/custom_js.js "></script>
         <script type="text/javascript" src="/codepac/css/prettify/src/prettify.js"></script>
 
 	<!-- blueprint CSS framework -->
@@ -24,6 +39,99 @@
 </head>
 
 <body onload="styleCode()">
+
+<?php if(isset($fbconfig)): ?>
+<div id="fb-root"></div>
+<script>
+window.fbAsyncInit = function() {
+    FB.init({
+        appId   : '<?php echo $facebook->getAppId(); ?>',
+        session : <?php echo json_encode($fb_session); ?>, // don't refetch the session when PHP already has it
+        status  : <?php echo $fbconfig['status']; ?>, // check login status
+        cookie  : <?php echo $fbconfig['cookie']; ?>, // enable cookies to allow the server to access the session
+        xfbml   : <?php echo $fbconfig['xfbml']; ?> // parse XFBML
+    });
+
+    // whenever the user logs in, we refresh the page
+    FB.Event.subscribe('auth.login', function() {
+        window.location.reload();
+    });
+};
+
+(function() {
+    var e = document.createElement('script');
+    e.src = document.location.protocol + '//connect.facebook.net/<?php echo $fbconfig['lang']; ?>/all.js';
+    e.async = true;
+    document.getElementById('fb-root').appendChild(e);
+}());
+</script>
+<?php endif; ?>
+
+<?php $this->widget('bootstrap.widgets.BootNavbar', array(
+    'fixed'=>false,
+    'brand'=>'Project name',
+    'brandUrl'=>'#',
+    'collapse'=>true, // requires bootstrap-responsive.css
+    'items'=>array(
+        array(
+            'class'=>'bootstrap.widgets.BootMenu',
+            'items'=>array(
+                array('label'=>'Home', 'url'=>'#', 'active'=>true),
+                array('label'=>'Link', 'url'=>'#'),
+                array('label'=>'Dropdown', 'url'=>'#', 'items'=>array(
+                    array('label'=>'Action', 'url'=>'#'),
+                    array('label'=>'Another action', 'url'=>'#'),
+                    array('label'=>'Something else here', 'url'=>'#'),
+                    '---',
+                    array('label'=>'NAV HEADER'),
+                    array('label'=>'Separated link', 'url'=>'#'),
+                    array('label'=>'One more separated link', 'url'=>'#'),
+                )),
+            ),
+        ),
+        '<form class="navbar-search pull-left" action=""><input type="text" class="search-query span2" placeholder="Search"></form>',
+        array(
+            'class'=>'bootstrap.widgets.BootMenu',
+            'htmlOptions'=>array('class'=>'pull-right'),
+            'items'=>array(
+                array('label'=>'Link', 'url'=>'#'),
+                '---',
+                array('label'=>'Dropdown', 'url'=>'#', 'items'=>array(
+                    array('label'=>'Action', 'url'=>'#'),
+                    array('label'=>'Another action', 'url'=>'#'),
+                    array('label'=>'Something else here', 'url'=>'#'),
+                    '---',
+                    array('label'=>'Separated link', 'url'=>'#'),
+                )),
+            ),
+        ),
+    ),
+)); ?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <div class="container" id="page">
 
