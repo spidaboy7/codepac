@@ -18,9 +18,13 @@ $this->menu=array(
 <div class="question-view" style="width:700px;">
 	<div class="question-header-wrapper" style="height:20px;">
 		<div id="question-vote" style="float:left;">
-			<span id="up-vote-image"><img src="/codepacu/images/site/vote-arrow-up.png"><span></br>
-			<span id="question-vote-number"><?php echo $model->vote;?></span>Votes</br>
-			<span id="down-vote-image"><img src="/codepacu/images/site/vote-arrow-down.png"><span></br>
+			
+			<span id="question-vote-number"><?php echo    $qowner->getAvatar();
+                echo "<br>";
+                echo    $qowner->username;
+        ?>
+
+			
 			
 		</div>
 		<div class="question-user-time" style="float:center;"><span class="question-owner"><?php echo "posted by ".$qowner->username." on ".$model->create_date;?> </span></div>

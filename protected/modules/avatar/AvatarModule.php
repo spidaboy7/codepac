@@ -10,7 +10,7 @@ class AvatarModule extends CWebModule {
 	public $avatarPath = 'images/user';
 
 	// Set avatarMaxWidth to a value other than 0 to enable image size check
-	public $avatarMaxWidth = 200;
+	public $avatarMaxWidth = 0;
 
 	public $avatarThumbnailWidth = 50; // For display in user browse, friend list
 	public $avatarDisplayWidth = 200;

@@ -26,10 +26,31 @@ class SiteController extends Controller
 	 * when an action is not explicitly requested by users.
 	 */
 	public function actionIndex()
-	{
+	{	
 		// renders the view file 'protected/views/site/index.php'
 		// using the default layout 'protected/views/layouts/main.php'
-		$this->render('index');
+		$questions=array();
+		$id=NULL;
+		$title=NULL;
+		$question=Null;
+		$sql="SELECT *  FROM question  ";
+		$connection=Yii::app()->db;
+		$dataReader=$connection->createCommand($sql)->query();
+		// bind the 1st column with id var
+		$dataReader->bindColumn(1,$id);
+		// bind the 2nd column with title
+		$dataReader->bindColumn(2,$title);
+		while($dataReader->read()!==false)
+		{ 
+		        $question=new Question;
+			$question->id=$id;
+			$question->title=$title;
+			array_push($questions,$question);
+    		
+		}
+		
+
+		$this->render('index',array('questions'=>$questions));
 	}
 
 	/**
@@ -100,4 +121,6 @@ class SiteController extends Controller
 		Yii::app()->user->logout();
 		$this->redirect(Yii::app()->homeUrl);
 	}
+	
+
 }

@@ -101,7 +101,7 @@ class Question extends AutomatedTimeActiveRecord
 		$criteria->compare('owner',$this->owner);
 		$criteria->compare('status',$this->status);
 		$criteria->compare('create_date',$this->create_date,true);
-		$criteria->compare('update_time',$this->update_time,true);
+		$criteria->compare('views',$this->views,true);
 		$criteria->compare('vote',$this->vote,true);
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

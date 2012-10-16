@@ -50,6 +50,10 @@ class QuestionController extends Controller
 	 */
 	public function actionView($id)
 	{       $question=$this->loadModel($id);
+		if(Yii::app()->user->id!=$question->owner){
+		  $question->views++;
+		  $question->save();
+		}
 		$answer=$this->createAnswer($question);
 
 		$this->render('view',array(

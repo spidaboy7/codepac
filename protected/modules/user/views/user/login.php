@@ -11,16 +11,23 @@ $this->breadcrumbs=array(Yum::t('Login'));
 
 Yum::renderFlash();
 ?>
+<?php 
+	$fbconfig = Yum::module()->facebookConfig;
+	Yii::import('application.modules.user.vendors.facebook.*');
+        require_once('Facebook.php');
+    $facebook = new Facebook($fbconfig);
 
-<?php if (!Yii::app()->user->isGuest): ?>
+	$userId=$facebook->getUser();
+?>
+
+
 <a href="<?php echo $this->createUrl('/user/auth/logout'); ?>" class="exit"><div></div>
-   <span>Logout</span>
+ 
 </a>
-<?php else: ?>
 <fb:login-button perms="email,user_birthday,read_stream,publish_stream">
 <span>Login to Facebook</span>
 </fb:login-button>
-<?php endif; ?>
+
 
 <p>
 <?php 

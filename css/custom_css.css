@@ -23,3 +23,81 @@
 	float:right;
 
 }
+.short-summary {
+        border-top: 1px dotted #CCCCCE;
+        float: left;
+        overflow: hidden;
+        padding: 3px 0px 5px 0;
+        position: relative;
+        width: 740px;
+}
+
+.short-summary h2 a {
+        color: #2A5594;
+        font-family: "Trebuchet MS","segoe ui",arial,sans-serif;
+        font-size: 17px;
+}
+
+.short-summary .userinfo {
+        color: #666666;
+        float: right;
+        margin-top: 8px;
+}
+
+.userinfo a,a.userinfo { color: #3060A8; }
+
+.short-summary .counts {
+        float: left;
+        margin-right: 0px;
+        margin-top: 4px;
+        padding-right: 2px;
+}
+
+.short-summary .counts .item-count {
+        font-size: 17px;
+        font-weight: bold!important;
+}
+
+.short-summary .votes,.short-summary .status,.short-summary .views,.short-summary .answers{
+        -moz-border-radius: 5px 5px 5px 5px;
+        border-bottom: 1px solid #CCCCCC;
+        border-right: 1px solid #CCCCCC;
+        float: left;
+        font-size: 11px;
+	font-weight:bold;
+        height: 42px;
+        margin: 0 6px 0 0px;
+        padding: 8px 2px 0;
+        text-align: center;
+        width: 46px;
+}
+
+.short-summary .votes,.short-summary .views { color: #666666; }
+
+
+#question-table { margin-bottom: 10px; }
+
+.questions-count {
+        color: #A40000;
+        font-family: sans-serif;
+        font-size: 24px;
+        font-weight: 600;
+        margin-top: 3px;
+    margin-right: 5px;
+        padding: 0 0 5px 0;
+}
+
+.unanswered {
+        background: none no-repeat scroll 0 0 #F3E3E1;
+        color: #6B2B28;
+}
+.answered {
+        background: none repeat scroll 0 0 #E5EBF8;
+        color: #314362;
+}
+
+.answered-accepted,.answer-votes.answered-accepted {
+        background: none repeat scroll 0 0 #E6F8DD;
+        color: #3A6231;
+}
+

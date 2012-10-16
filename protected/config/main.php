@@ -10,18 +10,18 @@ return array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
 	'name'=>'CODEPAC',
 
-	// preloading 'log' component
-	'preload'=>array('log'),
+	// preloading 'bootstrap,log' component
+	'preload'=>array('bootstrap','log',),
 
 	// autoloading model and component classes
 	'import'=>array(
 		'application.models.*',
 		'application.components.*',
+	
 	),
 
 	'modules'=>array(
 		// uncomment the following to enable the Gii tool
-		'gii'=>array('generatorPaths'=>array('bootstrap.gii',),),
 		'user'=>array(
 		'debug'=>false,
 		'userTable'=>'user',
@@ -61,6 +61,7 @@ return array(
 			'password'=>'codepac123',
 		 	// If removed, Gii defaults to localhost only. Edit carefully to taste.
 			'ipFilters'=>array('127.0.0.1','::1'),
+			'generatorPaths'=>array('bootstrap.gii',),
 		),
 		
 	),
@@ -98,12 +99,12 @@ return array(
 		// uncomment the following to use a MySQL database
 		*/
 		 
-		'preload'=>array('bootstrap'),
+		
 		'db'=>array(
 			'connectionString' => 'mysql:host=localhost;dbname=codepacu',
 			'emulatePrepare' => true,
 			'username' => 'root',
-			'password' => '',
+			'password' => 'rwinkwavu',
 			'charset' => 'utf8',
                         'tablePrefix'=>'',
 		),

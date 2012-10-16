@@ -17,10 +17,10 @@ if(isset($fbconfig)) {
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="language" content="en" />
-        <script type="text/javascript" src="/codepac/css/wmd/showdown.js"></script>
-	<script type="text/javascript" src="/codepac/css/wmd/jQuery/jquery-1.2.6.min.js "></script>
-	<script type="text/javascript" src="/codepac/css/custom_js.js "></script>
-        <script type="text/javascript" src="/codepac/css/prettify/src/prettify.js"></script>
+	<script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl;?>/css/wmd/showdown.js"></script>
+	<script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl;?>/css/wmd/jQuery/jquery-1.2.6.min.js "></script>
+	<script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl;?>/css/custom_js.js "></script>
+        <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl;?>/css/prettify/src/prettify.js"></script>
 
 	<!-- blueprint CSS framework -->
 	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/screen.css" media="screen, projection" />
@@ -66,51 +66,52 @@ window.fbAsyncInit = function() {
 }());
 </script>
 <?php endif; ?>
+      <?php  if(!Yii::app()->user->isGuest){
+		$avatarUser=YumUser::model()->findByPk(Yii::app()->user->id); 
+		Yii::app()->clientScript->registerScript('avatar', "
+		$('{$avatarUser->getAvatar(true)}').prependTo('.dropdown-toggle');
 
-<?php $this->widget('bootstrap.widgets.BootNavbar', array(
-    'fixed'=>false,
-    'brand'=>'Project name',
+		");
+		}
+
+
+
+		else
+		$avatarUser='';
+ 	
+      ?>
+<?php  $this->widget('bootstrap.widgets.TbNavbar', array(
+    'type'=>'inverse', // null or 'inverse'
+    'brand'=>CHtml::encode(Yii::app()->name),
     'brandUrl'=>'#',
     'collapse'=>true, // requires bootstrap-responsive.css
     'items'=>array(
         array(
-            'class'=>'bootstrap.widgets.BootMenu',
+            'class'=>'bootstrap.widgets.TbMenu',
             'items'=>array(
-                array('label'=>'Home', 'url'=>'#', 'active'=>true),
-                array('label'=>'Link', 'url'=>'#'),
-                array('label'=>'Dropdown', 'url'=>'#', 'items'=>array(
-                    array('label'=>'Action', 'url'=>'#'),
-                    array('label'=>'Another action', 'url'=>'#'),
-                    array('label'=>'Something else here', 'url'=>'#'),
-                    '---',
-                    array('label'=>'NAV HEADER'),
-                    array('label'=>'Separated link', 'url'=>'#'),
-                    array('label'=>'One more separated link', 'url'=>'#'),
-                )),
+                array('label'=>'Home','url'=>array('/site/index'),),
+		array('label'=>'About', 'url'=>array('/site/page', 'view'=>'about')),
+		array('label'=>'Contact us','url'=>array('/site/contact')),
             ),
         ),
         '<form class="navbar-search pull-left" action=""><input type="text" class="search-query span2" placeholder="Search"></form>',
         array(
-            'class'=>'bootstrap.widgets.BootMenu',
+            'class'=>'bootstrap.widgets.TbMenu',
             'htmlOptions'=>array('class'=>'pull-right'),
             'items'=>array(
-                array('label'=>'Link', 'url'=>'#'),
+                array('label'=>'Sign in', 'url'=>array('/user/auth'),'visible'=>Yii::app()->user->isGuest),
                 '---',
-                array('label'=>'Dropdown', 'url'=>'#', 'items'=>array(
-                    array('label'=>'Action', 'url'=>'#'),
-                    array('label'=>'Another action', 'url'=>'#'),
-                    array('label'=>'Something else here', 'url'=>'#'),
-                    '---',
-                    array('label'=>'Separated link', 'url'=>'#'),
+                array('' ,  'url'=>array('//profile/profile/view', 'id' => Yii::app()->user->id), 'visible'=>!Yii::app()->user->isGuest,
+		'items'=>array(
+                    array('label'=>'Settings', 'url'=>array('/profile/profile/view')),
+                    array('label'=>'Logout', 'url'=>array('/user/user/logout')),
+                   
                 )),
             ),
         ),
     ),
-)); ?>
-
-
-
-
+));?>
+       
 
 
 
@@ -140,22 +141,22 @@ window.fbAsyncInit = function() {
 	</div><!-- header -->
 
 	<div id="mainmenu">
-		<?php $this->widget('zii.widgets.CMenu',array(
+		<?php
+      			/* $this->widget('zii.widgets.CMenu',array(
 			'items'=>array(
 				array('label'=>'Home', 'url'=>array('/site/index')),
-				array('label'=>'About', 'url'=>array('/site/page', 'view'=>'about')),
 				array('label'=>'Contact', 'url'=>array('/site/contact')),
-				array('label'=>'Login', 'url'=>array('/user/auth'), 'visible'=>Yii::app()->user->isGuest),
-				array('label'=>'Logout ('.Yii::app()->user->name.')', 'url'=>array('/user/user/logout'), 'visible'=>!Yii::app()->user->isGuest),
+				array('label'=>'Login', 'url'=>array('//user/auth'), 'visible'=>Yii::app()->user->isGuest),
+				array('label'=>'Logout ('.Yii::app()->user->name.')', 'url'=>array('//user/user/logout'), 'visible'=>!Yii::app()->user->isGuest),
 				array('label'=>'My profile ', 'url'=>array('/user/user/'), 'visible'=>!Yii::app()->user->isGuest),
 			),
-		)); ?>
+	)); */?>
 	</div><!-- mainmenu -->
-	<?php if(isset($this->breadcrumbs)):?>
+	<?php /* if(isset($this->breadcrumbs)):?>
 		<?php $this->widget('zii.widgets.CBreadcrumbs', array(
 			'links'=>$this->breadcrumbs,
 		)); ?><!-- breadcrumbs -->
-	<?php endif?>
+	<?php endif */ ?>
 
 	<?php echo $content; ?>
 
