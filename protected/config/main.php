@@ -28,8 +28,8 @@ return array(
 		'translationTable'=>'translation',
 		'mailer'=>'PHPMailer',
 		'facebookConfig'=>array(
-			'appId'=>'142433968341',
-			'secret'=>'a9f79372e1f945c0e0b743d9be8939f1',
+			'appId'=>'',
+			'secret'=>'sss',
 			'domain'=>'localhost',
 			'status'=>true,
 			'xfbml'=>true,
@@ -58,7 +58,7 @@ return array(
 
 		'gii'=>array(
 			'class'=>'system.gii.GiiModule',
-			'password'=>'codepac123',
+			'password'=>'wwwww',
 		 	// If removed, Gii defaults to localhost only. Edit carefully to taste.
 			'ipFilters'=>array('127.0.0.1','::1'),
 			'generatorPaths'=>array('bootstrap.gii',),
@@ -101,10 +101,10 @@ return array(
 		 
 		
 		'db'=>array(
-			'connectionString' => 'mysql:host=localhost;dbname=codepacu',
+			'connectionString' => 'mysql:host=localhost;dbname=ccsds',
 			'emulatePrepare' => true,
 			'username' => 'root',
-			'password' => 'rwinkwavu',
+			'password' => 'notreallyapassword',
 			'charset' => 'utf8',
                         'tablePrefix'=>'',
 		),
@@ -134,7 +134,7 @@ return array(
 	// using Yii::app()->params['paramName']
 	'params'=>array(
 		// this is used in contact page
-		'adminEmail'=>'eliemagambo@gmail.com',
+		'adminEmail'=>'officialme@gmail.com',
 	),
 	'import'=>array('application.modules.user.models.*',
 	'application.models.*',
